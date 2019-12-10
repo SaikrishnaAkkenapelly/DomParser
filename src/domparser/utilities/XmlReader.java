@@ -33,17 +33,17 @@ import domparser.pojos.Status;
  */
 public class XmlReader {
 
-	NodeList nodesList = null;
-	NodeList childNodes = null;
-	Node node = null;
-	Status status = null;
-	List<Location> locations = null;
-	Location location = null;
-	Node subChildNode = null;
-	PojoInsertion pojoInsertions = new PojoInsertion();
-	XmlReader xmlReader=null;
-	PoHeader poHeader = null;
-	static final Logger logger = Logger.getLogger(XmlReader.class);
+	private NodeList nodesList = null;
+	private NodeList childNodes = null;
+	private Node node = null;
+	private Status status = null;
+	private List<Location> locations = null;
+	private Location location = null;
+	private Node subChildNode = null;
+	private PojoInsertion pojoInsertions = new PojoInsertion();
+	private XmlReader xmlReader=null;
+	private PoHeader poHeader = null;
+	private static final Logger logger = Logger.getLogger(XmlReader.class);
 	public void readXml(File inputFile) {
 
 		try {
@@ -440,7 +440,7 @@ public class XmlReader {
 		return poHeader;
 	}
 
-	public void readXmlLine(Document doc, PoHeader poHeader) {
+	private void readXmlLine(Document doc, PoHeader poHeader) {
 
 		nodesList = doc.getElementsByTagName("PurchaseOrderLine");
 		List<PoLine> lines = new ArrayList<>();
@@ -848,7 +848,7 @@ public class XmlReader {
 		System.out.println(poHeader.getLines().get(0).getSchedules().get(1).getLocation().getLocationType());
 	}
 
-	public Status getStatusPojo(NodeList statusChildNodes) {
+	private Status getStatusPojo(NodeList statusChildNodes) {
 		Status statusPojo = new Status();
 		for (int position = 0; position < statusChildNodes.getLength(); position++) {
 
@@ -871,7 +871,7 @@ public class XmlReader {
 		return statusPojo;
 	}
 
-	public Location getUpdatedLocationPojo(Location location, Node subChildNode) {
+	private Location getUpdatedLocationPojo(Location location, Node subChildNode) {
 
 		for (int pos = 0; pos < subChildNode.getChildNodes().getLength(); pos++) {
 			if (subChildNode.getChildNodes().item(pos).getNodeName().equalsIgnoreCase("AttentionOfName")) {

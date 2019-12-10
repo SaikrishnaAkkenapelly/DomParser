@@ -26,10 +26,10 @@ import domparser.utilities.DbConnection;
  */
 public class DatabaseRetrival {
 
-	String query = null;
-	ResultSet resultSet = null;
-	PoHeader poHeader = null;
-	Logger logger =Logger.getLogger(DatabaseRetrival.class);
+	private String query = null;
+	private ResultSet resultSet = null;
+	private PoHeader poHeader = null;
+	private Logger logger =Logger.getLogger(DatabaseRetrival.class);
 	
 	
 	public PoHeader getPoheaderPojo(Long poheaderId) {

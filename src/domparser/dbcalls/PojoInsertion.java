@@ -24,7 +24,7 @@ import domparser.utilities.DbConnection;
  */
 public class PojoInsertion {
 
-	String sql = null;
+	private String sql = null;
 
 	public long insertStatusPojo(Status status) {
 		long status_id = 0;

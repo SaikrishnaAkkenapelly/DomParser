@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import domparser.utilities.PojosToXml;
+import domparser.utilities.XmlFormation;
 import domparser.utilities.XmlReader;
 import domparser.dbcalls.DatabaseRetrival;
 import domparser.pojos.PoHeader;
@@ -55,7 +55,10 @@ public class Parser {
 		long poLineId = 0;
 		long poScheduleId = 0;
 		List<PoSchedule> poScheduleList = null;
-		PojosToXml pojosToXml = new PojosToXml();
+		XmlFormation xmlFormation = new XmlFormation();
+		
+		//getting the header id inserted
+		
 		Long headerId = xmlReader.getPoHeader().getId();
 		PoHeader poHeader = dbRetrieval.getPoheaderPojo(headerId);
 		poHeader.setStatus(dbRetrieval.getStatus(headerId, null, null));
@@ -76,8 +79,9 @@ public class Parser {
 				poLines.get(i).setSchedules(poScheduleList);
 			}
 		}
+		//setting all line to header object  finally 
 		poHeader.setLines(poLines);
-		pojosToXml.XmlRetrieval(poHeader, properties);
+		xmlFormation.formXml(poHeader, properties);
 	}
 
 }

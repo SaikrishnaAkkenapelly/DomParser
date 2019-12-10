@@ -195,7 +195,7 @@ public class XmlReader {
 						subChildNode = childNodes.item(index).getChildNodes().item(position);
 						if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 							location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-							location = xmlReader.updateLocation(location, subChildNode);
+							location = xmlReader.updateLocationPojo(location, subChildNode);
 							location.setIsSupplierParty(true);
 							locations.add(location);
 							location = new Location();
@@ -223,7 +223,7 @@ public class XmlReader {
 							location.setLocationName(subChildNode.getTextContent());
 						} else if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 							location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-							location=xmlReader.updateLocation(location, subChildNode);
+							location=xmlReader.updateLocationPojo(location, subChildNode);
 							location.setIsShipToParty((true));
 							locations.add(location);
 							location = new Location();
@@ -257,7 +257,7 @@ public class XmlReader {
 						subChildNode = childNodes.item(index).getChildNodes().item(position);
 						if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 							location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-							location = xmlReader.updateLocation(location, subChildNode);
+							location = xmlReader.updateLocationPojo(location, subChildNode);
 							location.setIsShipFromParty(true);
 							locations.add(location);
 							location = new Location();
@@ -613,7 +613,7 @@ public class XmlReader {
 											} else if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 												location.setAddressType(
 														subChildNode.getAttributes().item(0).getTextContent());
-												location = xmlReader.updateLocation(location, subChildNode);
+												location = xmlReader.updateLocationPojo(location, subChildNode);
 
 											}
 										}
@@ -689,7 +689,7 @@ public class XmlReader {
 											} else if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 												location.setAddressType(
 														subChildNode.getAttributes().item(0).getTextContent());
-												location = xmlReader.updateLocation(location, subChildNode);
+												location = xmlReader.updateLocationPojo(location, subChildNode);
 												location.setIsPoSchedule(true);
 												location.setIsShipToParty(true);
 												schedule.setLocation(location);
@@ -756,7 +756,7 @@ public class XmlReader {
 									subChildNode = nodesChildList.item(index).getChildNodes().item(position);
 									if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 										location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-										xmlReader.updateLocation(location, subChildNode);
+										xmlReader.updateLocationPojo(location, subChildNode);
 										location.setIsSupplierParty(true);
 										locations.add(location);
 										location = new Location();
@@ -871,7 +871,7 @@ public class XmlReader {
 		return statusPojo;
 	}
 
-	public Location updateLocation(Location location, Node subChildNode) {
+	public Location updateLocationPojo(Location location, Node subChildNode) {
 
 		for (int pos = 0; pos < subChildNode.getChildNodes().getLength(); pos++) {
 			if (subChildNode.getChildNodes().item(pos).getNodeName().equalsIgnoreCase("AttentionOfName")) {

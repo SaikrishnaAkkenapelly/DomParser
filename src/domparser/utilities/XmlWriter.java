@@ -22,8 +22,8 @@ import domparser.pojos.PoHeader;
  * @author sakkenapelly
  *
  */
-public class XmlFormation {
-	public void formXml(PoHeader poheader, Properties properties) {
+public class XmlWriter {
+	public void writeXml(PoHeader poheader, Properties properties) {
 
 		Node childNode;
 		Node subChildNode;
@@ -32,7 +32,7 @@ public class XmlFormation {
 		Node rootNode;
 		Node postSubChildNode;
 		DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
-		final Logger logger = Logger.getLogger(XmlFormation.class);
+		final Logger logger = Logger.getLogger(XmlWriter.class);
 		try {
 			DocumentBuilder docbuilder = dbfactory.newDocumentBuilder();
 			Document doc = docbuilder.newDocument();

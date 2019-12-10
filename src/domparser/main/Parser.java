@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import domparser.utilities.XmlFormation;
+import domparser.utilities.XmlWriter;
 import domparser.utilities.XmlReader;
 import domparser.dbcalls.DatabaseRetrival;
 import domparser.pojos.PoHeader;
@@ -47,7 +47,7 @@ public class Parser {
 
 		File inputFile = new File("input.xml");
 		XmlReader xmlReader = new XmlReader();
-		xmlReader.parseXml(inputFile);
+		xmlReader.readXml(inputFile);
 
 		// Out bound
 
@@ -55,7 +55,7 @@ public class Parser {
 		long poLineId = 0;
 		long poScheduleId = 0;
 		List<PoSchedule> poScheduleList = null;
-		XmlFormation xmlFormation = new XmlFormation();
+		XmlWriter xmlWriter = new XmlWriter();
 		
 		//getting the header id inserted
 		
@@ -81,7 +81,7 @@ public class Parser {
 		}
 		//setting all line to header object  finally 
 		poHeader.setLines(poLines);
-		xmlFormation.formXml(poHeader, properties);
+		xmlWriter.writeXml(poHeader, properties);
 	}
 
 }

@@ -44,7 +44,7 @@ public class XmlReader {
 	XmlReader xmlReader=null;
 	PoHeader poHeader = null;
 	static final Logger logger = Logger.getLogger(XmlReader.class);
-	public void parseXml(File inputFile) {
+	public void readXml(File inputFile) {
 
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -195,7 +195,7 @@ public class XmlReader {
 						subChildNode = childNodes.item(index).getChildNodes().item(position);
 						if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 							location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-							location = xmlReader.updateLocationPojo(location, subChildNode);
+							location = xmlReader.getUpdatedLocationPojo(location, subChildNode);
 							location.setIsSupplierParty(true);
 							locations.add(location);
 							location = new Location();
@@ -223,7 +223,7 @@ public class XmlReader {
 							location.setLocationName(subChildNode.getTextContent());
 						} else if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 							location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-							location=xmlReader.updateLocationPojo(location, subChildNode);
+							location=xmlReader.getUpdatedLocationPojo(location, subChildNode);
 							location.setIsShipToParty((true));
 							locations.add(location);
 							location = new Location();
@@ -257,7 +257,7 @@ public class XmlReader {
 						subChildNode = childNodes.item(index).getChildNodes().item(position);
 						if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 							location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-							location = xmlReader.updateLocationPojo(location, subChildNode);
+							location = xmlReader.getUpdatedLocationPojo(location, subChildNode);
 							location.setIsShipFromParty(true);
 							locations.add(location);
 							location = new Location();
@@ -428,7 +428,7 @@ public class XmlReader {
 
 			// calling line method to insert lines
 			logger.info(" calling line method to insert lines");
-			xmlReader.parseXmlLine(doc, poHeader);
+			xmlReader.readXmlLine(doc, poHeader);
 
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 			logger.error("exception raised in xml reader while parsing header object");
@@ -440,7 +440,7 @@ public class XmlReader {
 		return poHeader;
 	}
 
-	public void parseXmlLine(Document doc, PoHeader poHeader) {
+	public void readXmlLine(Document doc, PoHeader poHeader) {
 
 		nodesList = doc.getElementsByTagName("PurchaseOrderLine");
 		List<PoLine> lines = new ArrayList<>();
@@ -613,7 +613,7 @@ public class XmlReader {
 											} else if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 												location.setAddressType(
 														subChildNode.getAttributes().item(0).getTextContent());
-												location = xmlReader.updateLocationPojo(location, subChildNode);
+												location = xmlReader.getUpdatedLocationPojo(location, subChildNode);
 
 											}
 										}
@@ -689,7 +689,7 @@ public class XmlReader {
 											} else if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 												location.setAddressType(
 														subChildNode.getAttributes().item(0).getTextContent());
-												location = xmlReader.updateLocationPojo(location, subChildNode);
+												location = xmlReader.getUpdatedLocationPojo(location, subChildNode);
 												location.setIsPoSchedule(true);
 												location.setIsShipToParty(true);
 												schedule.setLocation(location);
@@ -756,7 +756,7 @@ public class XmlReader {
 									subChildNode = nodesChildList.item(index).getChildNodes().item(position);
 									if (subChildNode.getNodeName().equalsIgnoreCase("Address")) {
 										location.setAddressType(subChildNode.getAttributes().item(0).getTextContent());
-										xmlReader.updateLocationPojo(location, subChildNode);
+										xmlReader.getUpdatedLocationPojo(location, subChildNode);
 										location.setIsSupplierParty(true);
 										locations.add(location);
 										location = new Location();
@@ -871,7 +871,7 @@ public class XmlReader {
 		return statusPojo;
 	}
 
-	public Location updateLocationPojo(Location location, Node subChildNode) {
+	public Location getUpdatedLocationPojo(Location location, Node subChildNode) {
 
 		for (int pos = 0; pos < subChildNode.getChildNodes().getLength(); pos++) {
 			if (subChildNode.getChildNodes().item(pos).getNodeName().equalsIgnoreCase("AttentionOfName")) {

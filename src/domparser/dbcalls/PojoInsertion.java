@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
+import org.apache.log4j.Logger;
+
 import domparser.pojos.Code;
 import domparser.pojos.Location;
 import domparser.pojos.PoHeader;
@@ -25,7 +27,7 @@ import domparser.utilities.DbConnection;
 public class PojoInsertion {
 
 	private String sql = null;
-
+	private Logger logger =Logger.getLogger(PojoInsertion.class);
 	public long insertStatusPojo(Status status) {
 		long status_id = 0;
 		sql = "INSERT INTO STATUS(STATUS_CODE,EFFECTIVE_DATETIME,ARCHIVE_INDICATOR,PO_HEADER_ID,PO_LINE_ID,PO_SCHEDULE_ID) VALUES(?,?,?,?,?,?)";
@@ -60,7 +62,7 @@ public class PojoInsertion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("exeception raised while inserting into status table");
 		}
 		return status_id;
 	}
@@ -85,7 +87,7 @@ public class PojoInsertion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("exeception raised while inserting into codes table");
 		}
 		return codeId;
 	}
@@ -171,7 +173,7 @@ public class PojoInsertion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("exeception raised while inserting into locations table");
 		}
 		return location_number;
 	}
@@ -202,7 +204,7 @@ public class PojoInsertion {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("exeception raised while inserting into location table");
 		}
 
 		return po_schedule_number;
@@ -292,7 +294,7 @@ public class PojoInsertion {
 			}
 			
 		}catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("exeception raised while inserting into line table");
 		}
 		return poline_number;
 	}
@@ -356,7 +358,7 @@ public class PojoInsertion {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("exeception raised while inserting into header table");
 		}
 		return headerId;
 	}

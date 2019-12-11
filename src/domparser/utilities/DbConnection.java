@@ -7,12 +7,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
+import domparser.dbcalls.DatabaseRetrival;
+
 /**
  * @author sakkenapelly
  *
  */
 public class DbConnection {
 
+	private static Logger logger =Logger.getLogger(DatabaseRetrival.class);
+	
 	public static Connection connect() {
 
 		Connection connection = null;
@@ -21,7 +27,7 @@ public class DbConnection {
 		try {
 			connection = DriverManager.getConnection(connectionUrl);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("exeception raised while establishing connection");
 		}
 		return connection;
 
